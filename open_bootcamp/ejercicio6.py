@@ -1,12 +1,19 @@
 class Vehiculo:
-  color = 'negro'
-  ruedas = 4
-  puertas = 4
+  def __init__(self, color, ruedas, puertas):
+    self.color = color
+    self.ruedas = ruedas
+    self.puertas = puertas
 
 class Coche(Vehiculo):
-  velocidad = 80
-  cilindrada = 1000
+  def __init__(self, color, ruedas, puertas, velocidad, cilindrada):
+    super().__init__(color, ruedas, puertas)
+    self.velocidad = velocidad
+    self.cilindrada = cilindrada
 
-car = Coche()
+car = Coche("negro", 4, 4, 180, 2000)
 
-print(car)
+print(f'El coche es de color {car.color},', end=' ')
+print(f'tiene {car.puertas} puertas,', end=' ')
+print(f'es de {car.ruedas} ruedas.', end=' ')
+print(f'Su velocidad max de {car.velocidad} km/h', end=' ')
+print(f'y una cilindrada de {car.cilindrada} cc')
