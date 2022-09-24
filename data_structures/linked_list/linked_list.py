@@ -7,7 +7,14 @@ class LinkedList:
     self.tail = None
   
   def append_node(self, value): #inserts values to the end of the list
-    pass
+    if self.size == 0:
+      self.head = Node(value)
+    else:
+      node = self.head
+      while node.next_node:
+        node = node.next_node
+      node.next_node = Node(value)
+    self.size += 1
 
   def unshift(self, value): #inserts values to the start of the list
     pass
@@ -29,3 +36,19 @@ class LinkedList:
 
   def each_node(self):
     pass
+
+  def __str__(self):
+    s = ''
+    node = self.head
+    while node:
+      s += f'( {node.value} ) -> '
+      node = node.next_node
+    s += 'None'
+    return s
+
+
+l = LinkedList()
+l.append_node(1)
+l.append_node(2)
+l.append_node(3)
+print(l)

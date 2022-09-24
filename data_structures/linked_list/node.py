@@ -1,7 +1,6 @@
 class Node:
-  def __init__(self):
-    self.value = None
+  def __init__(self, value = None):
+    self.value = value
     self.next_node = None
-    self.index = 0
   
   
