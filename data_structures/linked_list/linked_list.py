@@ -17,7 +17,10 @@ class LinkedList:
     self.size += 1
 
   def unshift(self, value): #inserts values to the start of the list
-    pass
+    temp = Node(value)
+    temp.next_node = self.head
+    self.head = temp
+    self.size += 1
 
   def value_at(self, index):
     pass
@@ -51,4 +54,5 @@ l = LinkedList()
 l.append_node(1)
 l.append_node(2)
 l.append_node(3)
+l.unshift(0)
 print(l)
