@@ -8,29 +8,24 @@ class LinkedList:
   
   def append_node(self, value): #inserts values to the end of the list
     self.tail = Node(value)
-    if self.size == 0:
-      self.head = self.tail
+    if self.size == 0: self.head = self.tail
     else:
-      node = self.head
-      while node.next_node:
-        node = node.next_node
+      node = self.last_node(self.size - 1)
       node.next_node = self.tail
     self.size += 1
 
   def unshift(self, value): #inserts values to the start of the list
+    del_val = self.head.value
     temp = Node(value)
     temp.next_node = self.head
     self.head = temp
     self.size += 1
+    return del_val
 
   def value_at(self, index):
     if index not in range(0, self.size): return None
 
-    node = self.head
-    i = 0
-    while i != index:
-      node = node.next_node
-      i += 1
+    node = self.last_node(index)
     return node.value
 
   def find(self, value): #return index
@@ -52,34 +47,30 @@ class LinkedList:
   def insert_at(self, value, index):
     if index not in range(0, self.size): return None
 
-    node = self.head
     self.size += 1
     if index == 0: self.unshift(value)
     else:
-      i = 1
-      while i != index:
-        node = node.next_node
-        i += 1
+      node = self.last_node(index, 1)
       temp = Node(value)
       temp.next_node, node.next_node = node.next_node, temp
 
   def delete_at(self, index):
     if index not in range(0, self.size): return None
     
-    node = self.head
     self.size -= 1
     if index == 0: self.head = self.head.next_node
     else:
-      i = 1
-      while i != index:
-        node = node.next_node
-        i += 1
+      node = self.last_node(index, 1)
       temp = node.next_node.value
       node.next_node = node.next_node.next_node
     return temp
 
-  def each_node(self):
-    pass
+  def last_node(self, index, i = 0):
+    node = self.head
+    while i != index:
+      node = node.next_node
+      i += 1
+    return node
 
   def __str__(self):
     s = ''
@@ -89,18 +80,3 @@ class LinkedList:
       node = node.next_node
     s += 'None'
     return s
-
-
-l = LinkedList()
-l.append_node(1)
-l.append_node(2)
-l.append_node(3)
-l.append_node(4)
-l.unshift(0)
-l.insert_at(1.5, 2)
-print(l)
-print(l.delete_at(2))
-print(l)
-print(l.value_at(5))
-print(l.find(1))
-print(l.include(5))
