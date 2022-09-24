@@ -34,7 +34,13 @@ class LinkedList:
     return node.value
 
   def find(self, value): #return index
-    pass
+    node = self.head
+    idx = 0
+    while node:
+      if node.value == value: return idx
+      node = node.next_node
+      idx += 1
+    return None
 
   def include(self, value):
     pass
@@ -66,3 +72,4 @@ l.append_node(4)
 l.unshift(0)
 print(l)
 print(l.value_at(5))
+print(l.find(1))
