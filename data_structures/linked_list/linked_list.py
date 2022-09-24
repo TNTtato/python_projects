@@ -24,8 +24,8 @@ class LinkedList:
     self.size += 1
 
   def value_at(self, index):
-    if index not in range(0, self.size):
-      return None
+    if index not in range(0, self.size): return None
+
     node = self.head
     i = 0
     while i != index:
@@ -64,7 +64,19 @@ class LinkedList:
       temp.next_node, node.next_node = node.next_node, temp
 
   def delete_at(self, index):
-    pass
+    if index not in range(0, self.size): return None
+    
+    node = self.head
+    self.size -= 1
+    if index == 0: self.head = self.head.next_node
+    else:
+      i = 1
+      while i != index:
+        node = node.next_node
+        i += 1
+      temp = node.next_node.value
+      node.next_node = node.next_node.next_node
+    return temp
 
   def each_node(self):
     pass
@@ -86,6 +98,8 @@ l.append_node(3)
 l.append_node(4)
 l.unshift(0)
 l.insert_at(1.5, 2)
+print(l)
+print(l.delete_at(2))
 print(l)
 print(l.value_at(5))
 print(l.find(1))
