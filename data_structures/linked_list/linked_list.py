@@ -7,13 +7,14 @@ class LinkedList:
     self.tail = None
   
   def append_node(self, value): #inserts values to the end of the list
+    self.tail = Node(value)
     if self.size == 0:
-      self.head = Node(value)
+      self.head = self.tail
     else:
       node = self.head
       while node.next_node:
         node = node.next_node
-      node.next_node = Node(value)
+      node.next_node = self.tail
     self.size += 1
 
   def unshift(self, value): #inserts values to the start of the list
@@ -23,7 +24,14 @@ class LinkedList:
     self.size += 1
 
   def value_at(self, index):
-    pass
+    if index not in range(0, self.size):
+      return None
+    node = self.head
+    i = 0
+    while i != index:
+      node = node.next_node
+      i += 1
+    return node.value
 
   def find(self, value): #return index
     pass
@@ -54,5 +62,7 @@ l = LinkedList()
 l.append_node(1)
 l.append_node(2)
 l.append_node(3)
+l.append_node(4)
 l.unshift(0)
 print(l)
+print(l.value_at(5))
