@@ -1,52 +1,26 @@
-from select import select
-import tkinter
+from tkinter import Tk, StringVar, Radiobutton, Label, Button, W
 
-win = tkinter.Tk()
-selection = tkinter.StringVar()
+def seleccionar():
+    monitor.config(text="{}".format(opcion.get()))
+def reset():
+    opcion.set(None)
+    monitor.config(text="")
 
-def createList():
-  global selection, win
-  frame = tkinter.Frame(win)
+root = Tk()
+opcion = StringVar()
+opcion.set(None)
+Radiobutton(root, text="Option 1", variable=opcion, 
+            value='Value 1', command=seleccionar).pack(anchor=W)
 
-  r1 = tkinter.Radiobutton(frame,
-      text='option 1',
-      activeforeground='blue',
-      value='value 1',
-      variable=selection
-  )
-  r1.pack()
-  r2 = tkinter.Radiobutton(frame,
-      text='option 2',
-      activeforeground='blue',
-      value='value 2',
-      variable=selection
-  )
-  r2.pack()
-  r3 = tkinter.Radiobutton(frame,
-      text='option 3',
-      activeforeground='blue',
-      value='value 3',
-      variable=selection
-  )
-  r3.pack()
-  r4 = tkinter.Radiobutton(frame,
-      text='option 4',
-      activeforeground='blue',
-      value='value 4',
-      variable=selection
-  )
-  r4.pack()
-  return frame
+Radiobutton(root, text="Option 2", variable=opcion, 
+            value='Value 2', command=seleccionar).pack(anchor=W)
+Radiobutton(root, text="Option 3", variable=opcion,   
+            value='Value 3', command=seleccionar).pack(anchor=W)
+Radiobutton(root, text="Option 4", variable=opcion,   
+            value='Value 4', command=seleccionar).pack(anchor=W)
 
-def reboot():
-  global win
-  win.destroy()
-  createList()
+monitor = Label(root)
+monitor.pack()
+Button(root, text="Reiniciar", command=reset).pack()
 
-frame = createList()
-btn_reboot = tkinter.Button(win,
-      text='Reboot',
-      command=reboot
-)
-btn_reboot.pack()
-win.mainloop()
+root.mainloop()
